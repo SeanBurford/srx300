@@ -9,6 +9,9 @@ Octeon srx_300(ram)# usb storage
             Capacity: 7672.0 MB = 7.4 GB (15712256 x 512)
 ```
 
+*  https://www.reddit.com/r/Juniper/comments/pu5jsi/srx300_known_eusb_alternatives_featuring_probably/
+*  https://www.reddit.com/r/Juniper/comments/srk4io/dead_flash_in_srx320/
+
 ```
 loader> nextboot
 Platform: srx-sword
