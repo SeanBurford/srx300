@@ -1,5 +1,9 @@
 ## Hardware
 
+Internal description/pictures:
+
+*  https://www.juniper.net/documentation/en_US/release-independent/junos/topics/reference/compliance/srx300-letter-of-volatility.pdf
+
 This device probably has problems with ATP eUSB modules becoming slower over time:
 
 ```
