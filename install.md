@@ -23,44 +23,11 @@ Platform: srx-sword
     usb
 ```
 
-## Autoconfig files
-
-### autoinstall.conf
-
-From [11](https://www.juniper.net/documentation/us/en/software/junos/junos-install-upgrade/topics/topic-map/understanding-autoinstallation-config-files.html):
-
-1. DHCP provides hostname and TFTP server address.
-   1. If not hostname is provided, tftp://network.conf is consulted (host/IP map).
-2. TFTP server provides config in tftp://{hostname}.conf
-   1. Default is tftp://router.conf if no hostname is found.
-
-Autoinstall.conf looks like it's possible the same as router.conf/{hostname}.conf/junos-config below?
-
-### junos-config.conf
-
-This looks like a structured version of the CLI config commands.
-
-From [1](https://www.juniper.net/documentation/us/en/software/junos/junos-install-upgrade/topics/topic-map/install-software-on-srx.html):
-
-```
-system {
-    host-name host-1;
-    domain-name example.net;
-    name-server 8.8.8.8;
-    domain-search [ abc.example.net example.net device1.example.net ];
-    root-authentication {
-        encrypted-password "$ABC123"; ## SECRET-DATA
-    }
-}
-...
-routing-options {
-    static {
-        route 0.0.0.0/0 next-hop 10.207.31.254;
-    }
-}
-```
-
 ## Software Versions/Hashes
+
+From [4](https://www.reddit.com/r/homelab/comments/14iduq6/recovering_an_srx300_with_wiped_partitions/)
+
+If you have an older loader, you cannot install versions later than 15 directly.  You have to install 15 then upgrade to 19 etc.  Upgrading the loader using TFTP may also be an option.
 
 From [4](https://supportportal.juniper.net/s/article/Junos-Software-Versions-Suggested-Releases-to-Consider-and-Evaluate) and https://support.juniper.net/support/downloads/?f=srx
 
@@ -68,6 +35,8 @@ From [4](https://supportportal.juniper.net/s/article/Junos-Software-Versions-Sug
 *  21.4R3-S3 (11 April 2023) (Recommended): 41caa7b5c7fac3a6ba75b31f857ac7c3ec033609f8b93b04f49cc7b9160398b9 (hash listed at https://forums.servethehome.com/index.php?threads/srx300-firmware.29945/page-2)
 *  21.4R3 (8 Sep 2022): e1ff3dad1d4ba3b69ad2bc502e512e832b3c4f1682be7b96a7b2a7cc57da2d9d
 *  21.2R3 (29 Mar 2022): 1ef777147e281ea447c328a5a792b50f70d7128e5e3e200b792739970752d579
+
+The 15.1X49D90.7 version from archive.org has this SHA256 hash: 154926943a4941eeab918d4fedbd0e57ef8028f849af02ee10aee6986e8a53ce
 
 Devices after June 14 2019 Require at least 15.1X49 due to upgraded eUSB driver/hardware:
 
@@ -291,6 +260,43 @@ From [1](https://www.juniper.net/documentation/us/en/software/junos/junos-instal
 2. `show log messages`
 3. `request system storage cleanup`
 
+## Autoconfig files
+
+### autoinstall.conf
+
+From [11](https://www.juniper.net/documentation/us/en/software/junos/junos-install-upgrade/topics/topic-map/understanding-autoinstallation-config-files.html):
+
+1. DHCP provides hostname and TFTP server address.
+   1. If not hostname is provided, tftp://network.conf is consulted (host/IP map).
+2. TFTP server provides config in tftp://{hostname}.conf
+   1. Default is tftp://router.conf if no hostname is found.
+
+Autoinstall.conf looks like it's possible the same as router.conf/{hostname}.conf/junos-config below?
+
+### junos-config.conf
+
+This looks like a structured version of the CLI config commands.
+
+From [1](https://www.juniper.net/documentation/us/en/software/junos/junos-install-upgrade/topics/topic-map/install-software-on-srx.html):
+
+```
+system {
+    host-name host-1;
+    domain-name example.net;
+    name-server 8.8.8.8;
+    domain-search [ abc.example.net example.net device1.example.net ];
+    root-authentication {
+        encrypted-password "$ABC123"; ## SECRET-DATA
+    }
+}
+...
+routing-options {
+    static {
+        route 0.0.0.0/0 next-hop 10.207.31.254;
+    }
+}
+```
+
 ## References
 
 1. https://www.juniper.net/documentation/us/en/software/junos/junos-install-upgrade/topics/topic-map/install-software-on-srx.html
@@ -306,4 +312,4 @@ From [1](https://www.juniper.net/documentation/us/en/software/junos/junos-instal
 11. https://www.juniper.net/documentation/us/en/software/junos/junos-install-upgrade/topics/topic-map/understanding-autoinstallation-config-files.html
 12. https://www.reddit.com/r/Juniper/comments/dzuw4u/fail_to_boot_juniper_srx340_by_usb/
 13. https://www-origin-stage.junipercloud.net/documentation/us/en/software/junos/junos-install-upgrade/junos-install-upgrade.pdf
-
+14. https://www.reddit.com/r/homelab/comments/14iduq6/recovering_an_srx300_with_wiped_partitions/
