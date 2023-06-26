@@ -27,7 +27,29 @@ Platform: srx-sword
 
 From [4](https://www.reddit.com/r/homelab/comments/14iduq6/recovering_an_srx300_with_wiped_partitions/)
 
-If you have an older loader, you cannot install versions later than 15 directly.  You have to install 15 then upgrade to 19 etc.  Upgrading the loader using TFTP may also be an option.
+If you have an older loader, you cannot install versions later than a certain point directly.  You have to install 15 then upgrade to 19 etc.  Upgrading the loader using TFTP may also be an option.
+
+With my loader version, I can install JunOS major version 19 but not 21:
+
+```
+FreeBSD/MIPS U-Boot bootstrap loader, Revision 2.10
+(slt-builder@svl-junos-pool87.juniper.net, Sun Mar  4 10:30:52 PST 2018)
+Memory: 4096MB
+...
+loader> install tftp://192.168.1.1/junos-srxsme-19.4R3.11.tgz
+Target device selected for installation: internal media 
+BCM MDK initializing ...
+BCM MDK init done.
+octeth0: Up 1000 Mbps Full duplex (port  0) (SGMII)
+/kernel data=0x123c554+0x1bf3cc pkg_seek: negative file seek (-1362)
+
+lseek failed
+syms=[0x4+0xb8580+0x4+0x11a427]
+Kernel entry at 0x801000c0 ...
+init regular console
+Primary ICache: Sets 16 Size 128 Asso 39
+...
+```
 
 From [4](https://supportportal.juniper.net/s/article/Junos-Software-Versions-Suggested-Releases-to-Consider-and-Evaluate) and https://support.juniper.net/support/downloads/?f=srx
 
